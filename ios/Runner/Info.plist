@@ -49,5 +49,7 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NMFClientId</key>
+        <string>j8x23ixn8h</string>
 	</dict>
 </plist>

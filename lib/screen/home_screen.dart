@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memory/screen/splash_screen.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   String? Today_date;
-
+  late NaverMapController mapController; // 네이버 지도 컨트롤러
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   renderHomeScreen(){
+
+
+
+    NMapType _mapType = NMapType.basic;
     return Container(
       child: Column(
         children: [
@@ -49,11 +54,46 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             flex: 9,
             child: Container(
-              color:Colors.orange
+              color:Colors.orange,
+              child: NaverMap(
+                onMapReady: onMapReady,
+                onMapTapped: onMapTapped,
+                onSymbolTapped: onSymbolTapped,
+                onCameraChange: onCameraChange,
+                onCameraIdle: onCameraIdle,
+                onSelectedIndoorChanged: onSelectedIndoorChanged,
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+
+  /* ----- Events ----- */
+
+  void onMapReady(NaverMapController controller) {
+    mapController = controller;
+  }
+
+  void onMapTapped(NPoint point, NLatLng latLng) {
+    // ...
+  }
+
+  void onSymbolTapped(NSymbolInfo symbolInfo) {
+    // ...
+  }
+
+  void onCameraChange(NCameraUpdateReason reason, bool isGesture) {
+    // ...
+  }
+
+  void onCameraIdle() {
+    // ...
+  }
+
+  void onSelectedIndoorChanged(NSelectedIndoor? selectedIndoor) {
+    // ...
   }
 }
