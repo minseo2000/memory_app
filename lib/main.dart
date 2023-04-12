@@ -4,6 +4,7 @@ import 'package:memory/screen/home_screen.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:memory/firebase_options.dart';
+import 'package:memory/screen/login_screen.dart';
 void main() async {
 
 
@@ -18,7 +19,7 @@ void main() async {
   );
 
   runApp(MaterialApp(
-    home: HomeScreen(),
+    home: LoginScreen(),
 
     // 달력 언어 설정을 위한 설정.
     localizationsDelegates: const[
