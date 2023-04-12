@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:memory/screen/splash_screen.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
@@ -11,20 +12,30 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+
+  var currentPostion;
+  final latLng = NLatLng(37.5666, 126.979);
+  late NCameraPosition curPostion = NCameraPosition(target: latLng, zoom: 15);
+
   String? Today_date;
   late NaverMapController mapController; // 네이버 지도 컨트롤러
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: renderHomeScreen(),
       ),
     );
   }
-
+  @override
+  void initState(){
+    load_my_Current_pos();
+  }
 
   renderHomeScreen(){
-
 
 
     NMapType _mapType = NMapType.basic;
@@ -56,6 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               color:Colors.orange,
               child: NaverMap(
+                options: NaverMapViewOptions(
+                  initialCameraPosition: curPostion
+                ),
                 onMapReady: onMapReady,
                 onMapTapped: onMapTapped,
                 onSymbolTapped: onSymbolTapped,
@@ -71,10 +85,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
+
   /* ----- Events ----- */
 
-  void onMapReady(NaverMapController controller) {
+  void onMapReady(NaverMapController controller){
     mapController = controller;
+    mapController.updateCamera(NCameraUpdate.withParams(
+        target: NLatLng(currentPostion.latitude, currentPostion.longitude)
+    ));
+
   }
 
   void onMapTapped(NPoint point, NLatLng latLng) {
@@ -95,5 +114,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onSelectedIndoorChanged(NSelectedIndoor? selectedIndoor) {
     // ...
+  }
+
+  void load_my_Current_pos() async {
+    currentPostion = await Geolocator.getCurrentPosition();
+    print(currentPostion.latitude);
+    print(currentPostion.longitude);
   }
 }
