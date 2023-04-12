@@ -28,6 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: renderHomeScreen(),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          mapController.updateCamera(NCameraUpdate.withParams(
+              target: NLatLng(currentPostion.latitude, currentPostion.longitude)
+          ));
+        },
+        child: Icon(Icons.location_on),
+      ),
     );
   }
   @override
@@ -76,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onCameraChange: onCameraChange,
                 onCameraIdle: onCameraIdle,
                 onSelectedIndoorChanged: onSelectedIndoorChanged,
+
               ),
             ),
           ),
@@ -93,7 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
     mapController.updateCamera(NCameraUpdate.withParams(
         target: NLatLng(currentPostion.latitude, currentPostion.longitude)
     ));
-
   }
 
   void onMapTapped(NPoint point, NLatLng latLng) {
