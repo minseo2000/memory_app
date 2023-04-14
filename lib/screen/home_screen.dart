@@ -68,8 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   renderHomeScreen(){
-
-
     NMapType _mapType = NMapType.basic;
     return Container(
       child: Column(

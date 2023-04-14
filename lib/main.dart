@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:memory/screen/bluetooth_screen.dart';
+import 'package:memory/screen/chat_list_screen.dart';
 import 'package:memory/screen/chat_screen.dart';
 import 'package:memory/screen/home_screen.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
@@ -21,7 +23,7 @@ void main() async {
   );
 
   runApp(MaterialApp(
-    home: ChatScreen(),
+    home: HomeScreen(),
 
     // 달력 언어 설정을 위한 설정.
     localizationsDelegates: const[
