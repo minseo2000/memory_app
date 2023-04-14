@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
           //exif 정보 추출
           final picker = ImagePicker();
           pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
           exif = await Exif.fromPath(pickedFile!.path);
           print('내용 출력');
           var info = await exif?.getAttributes();
