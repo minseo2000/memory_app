@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:memory/screen/splash_screen.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,10 +19,34 @@ class _HomeScreenState extends State<HomeScreen> {
   String? Today_date;
   late NaverMapController mapController; // 네이버 지도 컨트롤러
 
+  //위치 권한 확인하는 함수 이다.
+  Future<String> checkPermission() async{
+    final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+
+    if(!isLocationEnabled){
+      return '위치 서비스를 활성해주세요.';
+    }
+    LocationPermission checkedPermission = await Geolocator.checkPermission();
+
+    if(checkedPermission == LocationPermission.denied){
+      //위치 권한이ㅣ 거절되었을 경우
+
+      //위치 권한 요청하기
+      checkedPermission = await Geolocator.requestPermission();
+      if(checkedPermission== LocationPermission.denied){
+        return '위치 권한을 허가해주세요.';
+      }
+    }
+    //위치 권한이 거절되었을 경우 ( 앱에서 재 요청 불가)
+    if(checkedPermission == LocationPermission.deniedForever){
+      return '앱의 위치 권한을 설정에서 허가해주세요.';
+    }
+
+    return '위치 권한이 허가 되었습니다.';
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: renderHomeScreen(),
@@ -40,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   void initState(){
+    checkPermission();
     load_my_Current_pos();
   }
 
