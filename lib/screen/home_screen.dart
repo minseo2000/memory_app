@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:native_exif/native_exif.dart';
+import 'package:path_provider/path_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,9 +21,16 @@ class _HomeScreenState extends State<HomeScreen> {
   final latLng = NLatLng(37.5666, 126.979);
   late NCameraPosition curPostion = NCameraPosition(target: latLng, zoom: 15);
 
+
+
+
   String? Today_date;
   late NaverMapController mapController; // 네이버 지도 컨트롤러
 
+
+
+  XFile? pickedFile;
+  Exif? exif;
   //위치 권한 확인하는 함수 이다.
   Future<String> checkPermission() async{
     final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
@@ -52,10 +64,35 @@ class _HomeScreenState extends State<HomeScreen> {
         child: renderHomeScreen(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () async{
           mapController.updateCamera(NCameraUpdate.withParams(
               target: NLatLng(currentPostion.latitude, currentPostion.longitude)
           ));
+
+
+          //exif 정보 추출
+          final picker = ImagePicker();
+          pickedFile = await picker.pickImage(source: ImageSource.gallery);
+          exif = await Exif.fromPath(pickedFile!.path);
+          print('내용 출력');
+          var info = await exif?.getAttributes();
+          print(info!['GPSLongitude']);
+          print(info!['GPSLatitude']);
+          print(info!['DateTimeOriginal']);
+          print(pickedFile!.path);
+          print('내용 출력');
+
+          File f1 = File(pickedFile!.path);
+
+          final marker = NMarker(
+            id: "test",
+            position: NLatLng(double.parse(info!['GPSLatitude'].toString()), double.parse(info!['GPSLongitude'].toString())),
+            icon: NOverlayImage.fromFile(f1),
+            size: Size(100,100),
+
+          );
+          mapController.addOverlay(marker);
+
         },
         child: Icon(Icons.location_on),
       ),
@@ -124,6 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
     mapController.updateCamera(NCameraUpdate.withParams(
         target: NLatLng(currentPostion.latitude, currentPostion.longitude)
     ));
+
+
+
   }
 
   void onMapTapped(NPoint point, NLatLng latLng) {
