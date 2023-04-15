@@ -4,6 +4,7 @@ import 'package:memory/screen/map_screen.dart';
 
 
 import 'chat_list_screen.dart';
+import 'chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //renderHomeScreen(),
     MapScreen(),
     ChatListScreen(),
-    ChatListScreen(),
+    ChatScreen(),
 
 
   ]; // 3개의 페이지를 연결할 예정이므로 3개의 페이지를 여기서 지정해준다. 탭 레이아웃은 3개.

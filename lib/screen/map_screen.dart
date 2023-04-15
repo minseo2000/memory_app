@@ -32,6 +32,7 @@ class _MapScreenState extends State<MapScreen> {
   Exif? exif;
 
   NMapType _mapType = NMapType.basic;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,6 +102,7 @@ class _MapScreenState extends State<MapScreen> {
 
           File f1 = File(pickedFile!.path);
 
+
           final marker = NMarker(
             id: "test",
             position: NLatLng(double.parse(info!['GPSLatitude'].toString()), double.parse(info!['GPSLongitude'].toString())),
@@ -109,6 +111,10 @@ class _MapScreenState extends State<MapScreen> {
 
           );
           mapController.addOverlay(marker);
+
+          var path = NArrowheadPathOverlay(color:Colors.black,id: "test", coords: <NLatLng>[NLatLng(double.parse(info!['GPSLatitude'].toString()), double.parse(info!['GPSLongitude'].toString())),
+            NLatLng(37.5666, 126.979), NLatLng(27.5666, 126.979)]);
+          mapController.addOverlay(path);
 
         },
         child: Icon(Icons.location_on),
@@ -128,10 +134,13 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void onMapTapped(NPoint point, NLatLng latLng) {
+    print('맵클릭');
     // ...
   }
 
   void onSymbolTapped(NSymbolInfo symbolInfo) {
+    print(symbolInfo.position);
+    print(symbolInfo.caption);
     // ...
   }
 

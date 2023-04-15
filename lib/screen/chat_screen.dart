@@ -24,7 +24,9 @@ class _ChatScreenState extends State<ChatScreen> {
                       Expanded(
                         flex: 1,
                         child: ElevatedButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.pop(context);
+                          },
                           child: Icon(
                               Icons.arrow_back_ios
                           ),
@@ -61,6 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             children: [
                               Container(
                                 margin: EdgeInsets.all(10.0),
+                                color: Colors.white,
                                 child: Row(
                                   children: [
                                     Icon(Icons.add),
@@ -72,6 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               ),
                               Container(
                                 margin: EdgeInsets.all(10.0),
+                                color: Colors.white,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [

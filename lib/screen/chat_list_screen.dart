@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memory/screen/chat_screen.dart';
 
 
 class ChatListScreen extends StatefulWidget {
@@ -39,7 +40,9 @@ class _ChatListScreenState extends State<ChatListScreen> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               ElevatedButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => ChatScreen()));
+                                },
                                 child: Icon(Icons.search),
                               ),
                             ],
