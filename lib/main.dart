@@ -23,7 +23,7 @@ void main() async {
   );
 
   runApp(MaterialApp(
-    home: HomeScreen(),
+    home: LoginScreen(),
 
     // 달력 언어 설정을 위한 설정.
     localizationsDelegates: const[

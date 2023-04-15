@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:memory/screen/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -54,103 +55,111 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Expanded(
                       flex: 7,
-                      child: Container(
-                          color: Colors.yellow,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 50.0,),
-                              Text('추억',
-                                style: TextStyle(
-                                  fontSize: 45.0,
+                      child: SingleChildScrollView(
+                        child: Container(
+                            color: Colors.yellow,
+                            child: Column(
+                              children: [
+                                SizedBox(height: 50.0,),
+                                Text('추억',
+                                  style: TextStyle(
+                                    fontSize: 45.0,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 10.0,),
-                              Text('자동으로 기억되는 삶'),
-                              Image.asset('asset/img/tree.png'),
-                            ],
-                          )
-                      ),
+                                SizedBox(height: 10.0,),
+                                Text('자동으로 기억되는 삶'),
+                                Image.asset('asset/img/tree.png'),
+                              ],
+                            )
+                        ),
+                      )
                     ),
                     Expanded(
                       flex: 3,
-                      child: Container(
-                        color: Colors.red,
-                        child: Form(
-                          key: this.formKey,
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(),
-                                  ),
-                                  Expanded(
-                                      flex: 8,
-                                      child: TextFormField()
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10.0,),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(),
-                                  ),
-                                  Expanded(
-                                      flex: 8,
-                                      child: TextFormField()
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10.0,),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: Container(),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Container(
-                                      child: ElevatedButton(
-                                        onPressed: (){},
-                                        child: Text('로그인'),
+                      child: SingleChildScrollView(
+                        child: Container(
+                          color: Colors.red,
+                          child: Form(
+                            key: this.formKey,
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(),
+                                    ),
+                                    Expanded(
+                                        flex: 8,
+                                        child: TextFormField()
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(),
+                                    ),
+                                    Expanded(
+                                        flex: 8,
+                                        child: TextFormField()
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10.0,),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 5,
+                                      child: Container(),
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: Container(
+                                        child: ElevatedButton(
+                                          onPressed: (){
+                                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+                                          },
+                                          child: Text('로그인'),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Container(),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Container(
-                                      child: ElevatedButton(
-                                        onPressed: (){},
-                                        child: Text('회원가입'),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(),
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: Container(
+                                        child: ElevatedButton(
+                                          onPressed: (){
+
+                                          },
+                                          child: Text('회원가입'),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 5,
-                                    child: Container(),
-                                  ),
-                                ],
-                              )
-                            ],
+                                    Expanded(
+                                      flex: 5,
+                                      child: Container(),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
+                      )
                     )
                   ],
                 ),

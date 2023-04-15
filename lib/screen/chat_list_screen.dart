@@ -9,6 +9,9 @@ class ChatListScreen extends StatefulWidget {
 }
 
 class _ChatListScreenState extends State<ChatListScreen> {
+
+  List<Widget> chatList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +92,11 @@ class _ChatListScreenState extends State<ChatListScreen> {
   }
 
 
+  //데이터베이스에서 값을 불러온다. 어떤 데이터를 불러 올까?
+  // 1. 프로필 사진
+  // 2. 해당 사람 이름
+  // 3. 가장 최근 채팅 기록
+  void makeChatList(){
 
-  
+  }
 }
