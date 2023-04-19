@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:memory/firebase_options.dart';
 import 'package:memory/screen/login_screen.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 void main() async {
 
 
@@ -21,6 +22,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   runApp(MaterialApp(
     home: LoginScreen(),

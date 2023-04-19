@@ -45,6 +45,7 @@ dependencies:
   native_exif: ^0.4.1
   path_provider: ^2.0.14
   background_locator_2: ^2.0.6
+  firebase_auth: ^4.2.2
 
 dev_dependencies:
   flutter_test:
